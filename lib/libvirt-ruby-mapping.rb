@@ -2,13 +2,13 @@ require "libvirt-ruby-mapping/version"
 
 module Libvirt
   module Ruby
-    def initialize
-      virInitialize(:int) unless respond_to?(:virInitialize)
+    def self.initialize
+      virInitialize(:int) unless respond_to_missing?(:virInitialize, false)
       virInitialize
     end
 
     def self.version
-      virGetVersion(:pointer, :string, :pointer, :int) unless respond_to?(:virGetVersion)
+      virGetVersion(:pointer, :string, :pointer, :int) unless respond_to_missing?(:virGetVersion, false)
       p = FFI::MemoryPointer.new(:ulong)
       virGetVersion(p, nil, nil)
       version = p.get_ulong(0)
@@ -16,5 +16,3 @@ module Libvirt
     end
   end
 end
-
-Libvirt::ruby.initialize
