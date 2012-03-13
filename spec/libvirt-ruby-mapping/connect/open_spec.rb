@@ -14,13 +14,13 @@ describe Libvirt::Ruby::Connect do
       connect.open("uri")
     end
 
-    context "when the c function is not attached yet" do
+    context "when virConnectOpen is not attached yet" do
       it "should attach it" do
         connect.should_receive(:virConnectOpen).with(:string, :pointer)
       end
     end
 
-    context "when the c function is already attached" do
+    context "when virConnectOpen is already attached" do
       before :each do
         connect.stub(:respond_to_missing?).with(:virConnectOpen, false).and_return(true)
       end
@@ -30,7 +30,7 @@ describe Libvirt::Ruby::Connect do
       end
     end
 
-    it "should call the attached c function" do
+    it "should call virConnectOpen" do
       connect.should_receive(:virConnectOpen)
     end
 

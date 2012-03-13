@@ -14,13 +14,13 @@ describe Libvirt::Ruby do
       libvirt.initialize
     end
 
-    context "when the c function is not attached yet" do
+    context "when virInitialize is not attached yet" do
       it "should attach it" do
         libvirt.should_receive(:virInitialize).with(:int)
       end
     end
 
-    context "when the c function is already attached" do
+    context "when virInitialize is already attached" do
       before :each do
         libvirt.stub(:respond_to_missing?).with(:virInitialize, false).and_return(true)
       end
@@ -30,7 +30,7 @@ describe Libvirt::Ruby do
       end
     end
 
-    it "should call the attached c function" do
+    it "should call virInitialize" do
       libvirt.should_receive(:virInitialize)
     end
   end
@@ -43,14 +43,14 @@ describe Libvirt::Ruby do
       p.stub(:get_ulong).with(0).and_return(8003)
     end
 
-    context "when the c function is not attached yet" do
+    context "when virGetVersion is not attached yet" do
       it "should attach it" do
         libvirt.should_receive(:virGetVersion).with(:pointer, :string, :pointer, :int)
         libvirt.version
       end
     end
 
-    context "when the c function is already attached" do
+    context "when virGetVersion is already attached" do
       before :each do
         libvirt.stub(:respond_to_missing?).with(:virGetVersion, false).and_return(true)
       end
