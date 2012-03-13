@@ -15,6 +15,10 @@ describe Libvirt::Ruby do
     end
 
     context "when virInitialize is not attached yet" do
+      before :each do
+        libvirt.stub(:respond_to?).with(:virInitialize).and_return(false)
+      end
+
       it "should attach it" do
         libvirt.should_receive(:virInitialize).with(:int)
       end
@@ -22,7 +26,7 @@ describe Libvirt::Ruby do
 
     context "when virInitialize is already attached" do
       before :each do
-        libvirt.stub(:respond_to_missing?).with(:virInitialize, false).and_return(true)
+        libvirt.stub(:respond_to?).with(:virInitialize).and_return(true)
       end
 
       it "should not try to attach it again" do
@@ -44,6 +48,10 @@ describe Libvirt::Ruby do
     end
 
     context "when virGetVersion is not attached yet" do
+      before :each do
+        libvirt.stub(:respond_to?).with(:virGetVersion).and_return(false)
+      end
+
       it "should attach it" do
         libvirt.should_receive(:virGetVersion).with(:pointer, :string, :pointer, :int)
         libvirt.version
@@ -52,7 +60,7 @@ describe Libvirt::Ruby do
 
     context "when virGetVersion is already attached" do
       before :each do
-        libvirt.stub(:respond_to_missing?).with(:virGetVersion, false).and_return(true)
+        libvirt.stub(:respond_to?).with(:virGetVersion).and_return(true)
       end
 
       it "should not try to attach it again" do

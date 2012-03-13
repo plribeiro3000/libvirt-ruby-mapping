@@ -4,12 +4,12 @@ module Libvirt
       extend Libvirt::Ruby
 
       def self.open(uri)
-        virConnectOpen(:string, :pointer) unless respond_to_missing?(:virConnectOpen, false)
+        virConnectOpen(:string, :pointer) unless respond_to?(:virConnectOpen)
         virConnectOpen(uri)
       end
 
       def self.open_read_only(uri)
-        virConnectOpenReadOnly(:string, :pointer) unless respond_to_missing?(:virConnectOpenReadOnly, false)
+        virConnectOpenReadOnly(:string, :pointer) unless respond_to?(:virConnectOpenReadOnly)
         virConnectOpenReadOnly(uri)
       end
     end

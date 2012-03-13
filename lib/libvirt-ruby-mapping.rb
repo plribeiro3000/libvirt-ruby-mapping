@@ -5,12 +5,12 @@ module Libvirt
     autoload :Connect, 'libvirt-ruby-mapping/connect'
 
     def self.initialize
-      virInitialize(:int) unless respond_to_missing?(:virInitialize, false)
+      virInitialize(:int) unless respond_to?(:virInitialize)
       virInitialize
     end
 
     def self.version
-      virGetVersion(:pointer, :string, :pointer, :int) unless respond_to_missing?(:virGetVersion, false)
+      virGetVersion(:pointer, :string, :pointer, :int) unless respond_to?(:virGetVersion)
       p = FFI::MemoryPointer.new(:ulong)
       virGetVersion(p, nil, nil)
       version = p.get_ulong(0)

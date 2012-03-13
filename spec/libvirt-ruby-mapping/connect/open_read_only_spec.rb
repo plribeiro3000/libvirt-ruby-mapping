@@ -15,6 +15,10 @@ describe Libvirt::Ruby::Connect do
     end
 
     context "when virConnectOpenReadOnly is not attached yet" do
+      before :each do
+        connect.stub(:respond_to?).with(:virConnectOpenReadOnly).and_return(false)
+      end
+
       it "should attach it" do
         connect.should_receive(:virConnectOpenReadOnly).with(:string, :pointer)
       end
@@ -22,7 +26,7 @@ describe Libvirt::Ruby::Connect do
 
     context "when virConnectOpenReadOnly is already attached" do
       before :each do
-        connect.stub(:respond_to_missing?).with(:virConnectOpenReadOnly, false).and_return(true)
+        connect.stub(:respond_to?).with(:virConnectOpenReadOnly).and_return(true)
       end
 
       it "should not try to attach it again" do
