@@ -2,6 +2,8 @@ require "libvirt-ruby-mapping/version"
 
 module Libvirt
   module Ruby
+    autoload :Connect, 'libvirt-ruby-mapping/connect'
+
     def self.initialize
       virInitialize(:int) unless respond_to_missing?(:virInitialize, false)
       virInitialize
