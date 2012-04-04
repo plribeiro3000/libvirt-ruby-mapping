@@ -35,7 +35,7 @@ describe Libvirt::Ruby::Connect do
     end
 
     it "should call virConnectOpen" do
-      connect.should_receive(:virConnectOpen)
+      connect.should_receive(:virConnectOpen).with("uri")
     end
 
     it "should return the pointer to the new connection" do

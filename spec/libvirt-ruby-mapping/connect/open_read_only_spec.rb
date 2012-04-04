@@ -35,7 +35,7 @@ describe Libvirt::Ruby::Connect do
     end
 
     it "should call virConnectOpenReadOnly" do
-      connect.should_receive(:virConnectOpenReadOnly)
+      connect.should_receive(:virConnectOpenReadOnly).with("uri")
     end
 
     it "should return the pointer to the new read only connection" do

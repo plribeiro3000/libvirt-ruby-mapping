@@ -12,6 +12,11 @@ module Libvirt
         virConnectOpenReadOnly(:string, :pointer) unless respond_to?(:virConnectOpenReadOnly)
         virConnectOpenReadOnly(uri)
       end
+
+      def self.close(connection)
+        virConnectClose(:pointer, :int) unless respond_to?(:virConnectClose)
+        virConnectClose(connection)
+      end
     end
   end
 end
