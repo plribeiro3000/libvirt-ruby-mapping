@@ -1,5 +1,7 @@
-require "rubygems"
-require "rspec"
-require "libvirt-ruby"
+require 'rspec'
+require 'libvirt-ruby'
+require 'coveralls'
 
-require File.dirname(__FILE__) + "/../lib/libvirt-ruby-mapping.rb"
+Coveralls.wear!
+
+require "#{File.dirname(__FILE__)}/../lib/libvirt-ruby-mapping.rb"
